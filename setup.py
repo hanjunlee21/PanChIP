@@ -1,14 +1,14 @@
 from distutils.core import setup
 setup(
-  name = 'PanChIP',         
-  packages = ['PanChIP'],   
-  version = '1.0',      
-  license='MIT',        
-  description = 'Pan-ChIP-seq Analysis of Peak Sets',   
-  author = 'Hanjun Lee',                   
-  author_email = 'hanjun@mit.edu',      
-  url = 'https://github.com/hanjunlee21/PanChIP',   
-  download_url = 'https://github.com/user/reponame/archive/v_01.tar.gz',    # I explain this later on
+  name = 'PanChIP',
+  packages = ['PanChIP'],
+  version = '1.0',
+  license='MIT',
+  description = 'Pan-ChIP-seq Analysis of Peak Sets',
+  author = 'Hanjun Lee',
+  author_email = 'hanjun@mit.edu',
+  url = 'https://github.com/hanjunlee21/PanChIP',
+  download_url = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.1.0.tar.gz',
   keywords = ['chip-seq', 'bedfile'],   
   install_requires=[            
           'subprocess',
