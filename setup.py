@@ -27,11 +27,6 @@ except:
         warnings.warn(
             "\nFailed to access matlab installation. Is it installed? In any case you can use pynare with engine='octave'.\n")
         
-# read the contents of the README file
-this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
-    
 setup(
   name = 'PanChIP',
   packages = ['PanChIP'],
