@@ -30,7 +30,7 @@ except:
 setup(
   name = 'PanChIP',
   packages = ['PanChIP'],
-  version = '1.1.1',
+  version = '1.0.1',
   license='MIT',
   description = 'Pan-ChIP-seq Analysis of Peak Sets',
   author = 'Hanjun Lee',
