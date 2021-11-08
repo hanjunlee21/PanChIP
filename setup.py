@@ -36,7 +36,7 @@ setup(
   author = 'Hanjun Lee',
   author_email = 'hanjun@mit.edu',
   url = 'https://github.com/hanjunlee21/PanChIP',
-  download_url = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.1.0.tar.gz',
+  download_url = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.1.0.1.tar.gz',
   keywords = ['chip-seq', 'bedfile'],   
   install_requires=[            
           'matlab_wrapper',
