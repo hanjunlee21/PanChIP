@@ -4,16 +4,19 @@ import warnings
 from os import path
 from setuptools import setup, find_packages
 
+__version__ = None
+exec(open('PanChIP/version.py').read())
+
 setup(
   name = 'PanChIP',
   packages = ['PanChIP'],
-  version = '1.0.2',
+  version = __version__,
   license='MIT',
   description = 'Pan-ChIP-seq Analysis of Peak Sets',
   author = 'Hanjun Lee',
   author_email = 'hanjun@mit.edu',
   url = 'https://github.com/hanjunlee21/PanChIP',
-  download_url = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.1.0.2.tar.gz',
+  download_url = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.' + __version__ + '.tar.gz',
   keywords = ['chip-seq', 'bedfile'],   
   install_requires=[
           'setuptools',
