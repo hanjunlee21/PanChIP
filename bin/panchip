@@ -33,7 +33,7 @@ class Panchip(object):
         
         lib_zip_path = lib_dir + 'Test.zip'
         with zipfile.ZipFile(lib_zip_path,'r') as zip_ref:
-        zip_ref.extractall('Test')
+            zip_ref.extractall('Test')
         
         
     def analysis(self, argv):
