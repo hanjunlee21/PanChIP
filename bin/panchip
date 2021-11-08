@@ -49,6 +49,8 @@ class Panchip(object):
         
         with zipfile.ZipFile(lib_zip_path,'r') as zip_ref:
             zip_ref.extractall(lib_dir)
+            
+        subprocess.call(['rm', lib_zip_path])
         
     def analysis(self, argv):
         parser = commands.analysis_parser()
