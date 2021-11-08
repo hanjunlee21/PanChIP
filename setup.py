@@ -19,7 +19,6 @@ setup(
   download_url = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.' + __version__ + '.tar.gz',
   keywords = ['chip-seq', 'bedfile'],   
   install_requires=[
-          'setuptools',
           'gdown',
           'argparse',
       ],
