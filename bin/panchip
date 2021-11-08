@@ -24,7 +24,9 @@ class Panchip(object):
                 
         args = parser.parse_args(sys.argv[1:option_ix+1])
         command = " ".join(sys.argv)
+        
         import PanChIP
+        
         getattr(self, args.command)([sys.argv[0]] + sys.argv[option_ix:])
             
     def init(self, argv):
