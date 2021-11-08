@@ -45,3 +45,9 @@ def analysis_parser():
         help='Input directory wherein peak sets in the format of .bed files are located.'
 
     return parser
+        
+class MyParser(argparse.ArgumentParser):
+    def error(self, message):
+        sys.stderr.write('error: %s\n' % message)
+        self.print_help()
+        sys.exit(2)
