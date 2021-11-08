@@ -1,45 +1,21 @@
 #!/bin/python3
 
-from matlab_wrapper.matlab_session import MatlabSession
 import warnings
 from os import path
 from setuptools import setup, find_packages
 
-try:
-    import matlab.engine
-    print('matlab engine already installed.\n')
-except:
-    print('Installing the matlab engine...', end='')
-    try:
-        matlab = MatlabSession()
-
-        matlab.eval("cd (fullfile(matlabroot,'extern','engines','python'))")
-        matlab.eval("system('python setup.py install')")
-
-        try:
-            import matlab.engine
-            print('done.\n')
-        except:
-            warnings.warn(
-                "\nFailed to install matlab engine. In any case you can use pynare with engine='octave'.\n")
-
-    except:
-        warnings.warn(
-            "\nFailed to access matlab installation. Is it installed? In any case you can use pynare with engine='octave'.\n")
-        
 setup(
   name = 'PanChIP',
   packages = ['PanChIP'],
-  version = '1.0.1',
+  version = '1.0.2',
   license='MIT',
   description = 'Pan-ChIP-seq Analysis of Peak Sets',
   author = 'Hanjun Lee',
   author_email = 'hanjun@mit.edu',
   url = 'https://github.com/hanjunlee21/PanChIP',
-  download_url = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.1.0.1.tar.gz',
+  download_url = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.1.0.2.tar.gz',
   keywords = ['chip-seq', 'bedfile'],   
-  install_requires=[            
-          'matlab_wrapper',
+  install_requires=[
           'setuptools',
           'gdown',
           'argparse',
