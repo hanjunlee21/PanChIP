@@ -17,6 +17,8 @@ def panchip_parser():
 
     from .version import __version__
     parser.add_argument('--version', action='version', version=f'PanChIP {__version__}')
+    
+    parser.add_argument('command', nargs='?', help='Subcommand to run')
 
     return parser
 
