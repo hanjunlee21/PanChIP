@@ -25,7 +25,8 @@ def panchip_parser():
 def init_parser():
     parser = MyParser(
         description='Initialization of the PanChIP library',
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        prog='panchip init'
     )
 
     parser.add_argument(
@@ -38,7 +39,8 @@ def init_parser():
 def analysis_parser():
     parser = MyParser(
         description='Analysis of a list peat sets',
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        prog='panchip analysis'
     )
         
     parser.add_argument(
