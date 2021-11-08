@@ -48,7 +48,7 @@ class Panchip(object):
         import zipfile
         
         with zipfile.ZipFile(lib_zip_path,'r') as zip_ref:
-            zip_ref.extractall(lib_dir + '/' + lib_name)
+            zip_ref.extractall(lib_dir)
         
     def analysis(self, argv):
         parser = commands.analysis_parser()
