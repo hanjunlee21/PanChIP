@@ -29,7 +29,7 @@ def init_parser():
     parser.add_argument(
         'library_directory',
         type=str,
-        help='Directory wherein PanChIP library will be stored (> 4.2 GB of storage required).'
+        help='Directory wherein PanChIP library will be stored. > 4.2 GB of storage required.')
 
     return parser
       
@@ -42,17 +42,17 @@ def analysis_parser():
     parser.add_argument(
         'library_directory',
         type=str,
-        help='Directory wherein PanChIP library was stored.'
+        help='Directory wherein PanChIP library was stored.')
 
     parser.add_argument(
         'input_directory',
         type=str,
-        help='Input directory wherein peak sets in the format of .bed files are located.'
+        help='Input directory wherein peak sets in the format of .bed files are located.')
        
     parser.add_argument(
         'output_directory',
         type=str,
-        help='Output directory wherein output files will be stored.'
+        help='Output directory wherein output files will be stored.')
 
     return parser
         
