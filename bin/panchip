@@ -9,6 +9,23 @@ class Panchip(object):
 
     def __init__(self):
         parser = commands.panchip_parser()
+        
+        flag_increments = {
+            '-l': 2, '--log-file': 2,
+        }
+
+        option_ix = 1
+        while (option_ix < len(sys.argv) and
+               sys.argv[option_ix].startswith('-')):
+            if sys.argv[option_ix] in flag_increments:
+                option_ix += flag_increments[sys.argv[option_ix]]
+            else:
+                option_ix += 1
+                
+        args = parser.parse_args(sys.argv[1:option_ix+1])
+        command = " ".join(sys.argv)
+        import PanChIP
+        getattr(self, args.command)([sys.argv[0]] + sys.argv[option_ix:])
             
     def init(self, argv):
         parser = commands.init_parser()
