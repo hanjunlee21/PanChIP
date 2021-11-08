@@ -9,6 +9,18 @@ class Panchip(object):
 
     def __init__(self):
         parser = commands.panchip_parser()
+
+        option_idx = 1
+        while (option_idx < len(sys.argv) and
+               sys.argv[option_idx].startswith('-')):
+            option_idx += 1
+
+        args = parser.parse_args(sys.argv[1:option_idx+1])
+        
+        if args.command is None or not hasattr(self, args.command):
+            print('Unrecognized command')
+            parser.print_help()
+            exit(1)
             
     def init(self, argv):
         parser = commands.init_parser()
