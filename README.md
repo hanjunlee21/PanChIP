@@ -1,5 +1,7 @@
 # PanChIP
 
+[![PyPI version](https://badge.fury.io/py/PanChIP.svg)](https://badge.fury.io/py/PanChIP)
+
 ## Pan-ChIP-seq Analysis of Peak Sets
 
 ### Installation
