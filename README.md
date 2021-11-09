@@ -2,16 +2,16 @@
 
 [![PyPI version](https://badge.fury.io/py/PanChIP.svg)](https://badge.fury.io/py/PanChIP)
 
-## Pan-ChIP-seq Analysis of Peak Sets
+**Pan-ChIP-seq Analysis of Peak Sets**
 
-### Installation
+## Installation
 ```shell
 pip install panchip
 ```
 
-### Usage
+## Usage
 
-#### panchip <command> [options]
+### panchip <command> [options]
 
 ```shell
 Commands:
@@ -29,7 +29,7 @@ optional arguments:
   --version   show program's version number and exit
 ```
 
-#### panchip init [-h] library_directory
+### panchip init [-h] library_directory
 
 ```shell
 
@@ -43,7 +43,7 @@ optional arguments:
   -h, --help         show this help message and exit
 ```
 
-#### panchip analysis [-h] [-t THREADS] [-r REPEATS] library_directory input_directory output_directory
+### panchip analysis [-h] [-t THREADS] [-r REPEATS] library_directory input_directory output_directory
 
 ```shell
 
