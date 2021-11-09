@@ -60,9 +60,9 @@ class Panchip(object):
         input_dir = os.path.abspath(args.input_directory)
         output_dir = os.path.abspath(args.output_directory)
         
-        
-        
-        f = open("guru99.txt","w+")
+        f = open(output_dir + 'bedfiles.sh','w+')
+        f.write('#!/bin/bash\nls ' + input_dir + ' > ' + output_dir + 'bedfiles.list')
+        f.close()
             
 
 if __name__ == '__main__':
