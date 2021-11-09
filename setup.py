@@ -24,7 +24,7 @@ setup(
       ],
   scripts=['bin/panchip'],
   classifiers=[
-    'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable"
+    'Development Status :: 4 - Beta',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable"
     'Intended Audience :: Science/Research',      
     'Topic :: Scientific/Engineering :: Bio-Informatics',
     'License :: OSI Approved :: MIT License',   
