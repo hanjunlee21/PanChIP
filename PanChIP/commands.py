@@ -57,6 +57,20 @@ def analysis_parser():
         'output_directory',
         type=str,
         help='Output directory wherein output files will be stored.')
+    
+    parser.add_argument(
+        '-t',
+        dest='threads',
+        type=int,
+        default=1,
+        help='Number of threads to use.')
+    
+    parser.add_argument(
+        '-r',
+        dest='repeats',
+        type=int,
+        default=1,
+        help='Number of repeats to perform.')
 
     return parser
         
