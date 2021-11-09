@@ -1,13 +1,3 @@
-#!/bin/bash
-# you must execute analysis by ./analysis.sh
-
-inputfiles="ChIP.RB ChIP.RB.Promoters ChIP.RB.Enhancers ChIP.RB.Insulators ChIP.RB.A ChIP.RB.B ChIP.RB.C ChIP.RB.D ChIP.RB.E ChIP.RB.F ChIP.RB.G ChIP.RB.H ChIP.CTCF ChIP.CTCF.RB ChIP.CTCF.nonRB"
-input="../input"
-threads="16"
-repeat="1"
-
-output="../output"
-lib="../lib/v.1.0"
 numlib=$(awk -v max=0 '{if($1>max){max=$1}}END{printf "%d", max}' $lib/SUM.count)
 TR="928"
 blnk=$(grep -o ' ' <<< "$inputfiles" | wc -l)
