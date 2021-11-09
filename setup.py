@@ -7,6 +7,10 @@ from setuptools import setup, find_packages
 __version__ = None
 exec(open('PanChIP/version.py').read())
 
+def read_file(filename):
+    with open(os.path.join(os.path.dirname(__file__), filename)) as file:
+        return file.read()
+
 setup(
   name = 'PanChIP',
   packages = ['PanChIP'],
