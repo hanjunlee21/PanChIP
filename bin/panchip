@@ -52,6 +52,12 @@ class Panchip(object):
             
         subprocess.call(['rm', lib_zip_path])
         
+        link = 'https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.' + __version__ + '.tar.gz'
+        tar_gz_path = lib_dir + '/v.' + __version__ + '.tar.gz'
+        subprocess.call(['wget', '-O', tar_gz_path, link])
+        subprocess.call(['tar', '-C', lib_dir, '-x', '-v', '-z', '-f', tar_gz_path])
+        subprocess.call(['rm', tar_gz_path])
+        
     def analysis(self, argv):
         parser = commands.analysis_parser()
 
@@ -78,7 +84,7 @@ class Panchip(object):
         f = open(output_dir + '/executable.sh','w+')
         f.write('#!/bin/bash\n\ninputfiles="' + input_list + '"\ninput="' + input_dir + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\nrepeat="' + repeat + '"\n\n')
         
-        with open('PanChIP/analysis.sh') as infile:
+        with open(lib_dir + '/PanChIP-v.' + __version__ + '/PanChIP/analysis.sh') as infile:
             for line in infile:
                 f.write(line)
                 
