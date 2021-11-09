@@ -13,6 +13,8 @@ setup(
   version = __version__,
   license='MIT',
   description = 'Pan-ChIP-seq Analysis of Peak Sets',
+  long_description=read_file('README.md'),
+  long_description_content_type='text/markdown',
   author = 'Hanjun Lee',
   author_email = 'hanjun@mit.edu',
   url = 'https://github.com/hanjunlee21/PanChIP',
