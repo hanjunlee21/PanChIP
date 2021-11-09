@@ -60,9 +60,17 @@ class Panchip(object):
         input_dir = os.path.abspath(args.input_directory)
         output_dir = os.path.abspath(args.output_directory)
         
-        f = open(output_dir + 'bedfiles.sh','w+')
-        f.write('#!/bin/bash\nls ' + input_dir + ' > ' + output_dir + 'bedfiles.list')
+        f = open(output_dir + '/bedfiles.sh','w+')
+        f.write('#!/bin/bash\nls ' + input_dir + ' | awk \'{printf "%s ", $1}\' | sed \'s/.bed//g\' > ' + output_dir + '/bedfiles.txt')
         f.close()
+        
+        subprocess.call(['sh', output_dir + '/bedfiles.sh'])
+        
+        input_list = open(output_dir + '/bedfiles.txt', 'r').read().rstrip()
+        subprocess.call(['rm', output_dir + '/bedfiles.sh'])
+        subprocess.call(['rm', output_dir + '/bedfiles.txt'])
+        
+        
             
 
 if __name__ == '__main__':
