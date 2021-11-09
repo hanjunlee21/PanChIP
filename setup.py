@@ -1,7 +1,7 @@
 #!/bin/python3
 
 import warnings
-from os import path
+import os
 from setuptools import setup, find_packages
 
 __version__ = None
