@@ -6,6 +6,8 @@ import argparse
 import subprocess
 import PanChIP.commands as commands
 
+lib_name = 'Test'
+
 class Panchip(object):
 
     def __init__(self):
@@ -39,7 +41,6 @@ class Panchip(object):
         
         import gdown
         
-        lib_name = 'Test'
         lib_zip_path = lib_dir + '/' + lib_name + '.zip'
         
         subprocess.call(['gdown', '-O', lib_zip_path, 'https://drive.google.com/uc?id=1Ccc1InE1WIvuFGKFz9ki8KwEvefpBlHu'])
@@ -59,6 +60,8 @@ class Panchip(object):
         lib_dir = os.path.abspath(args.library_directory)
         input_dir = os.path.abspath(args.input_directory)
         output_dir = os.path.abspath(args.output_directory)
+        thread = str(args.threads)
+        repeat = str(args.repeats)
         
         f = open(output_dir + '/bedfiles.sh','w+')
         f.write('#!/bin/bash\nls ' + input_dir + ' | awk \'{printf "%s ", $1}\' | sed \'s/.bed//g\' > ' + output_dir + '/bedfiles.txt')
@@ -70,7 +73,18 @@ class Panchip(object):
         subprocess.call(['rm', output_dir + '/bedfiles.sh'])
         subprocess.call(['rm', output_dir + '/bedfiles.txt'])
         
+        f = open(output_dir + '/executable.sh','w+')
+        f.write('#!/bin/bash\n\ninputfiles="' + input_list + '"\ninput="' + input_dir + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\nrepeat="' + repeat + '"\n\n')
         
+        with open('PanChIP/analysis.sh') as infile:
+            for line in infile:
+                f.write(line)
+                
+        f.close()
+        
+        f = open(output_dir + '/analysis.sh','w+')
+        f.write('#!/bin/bash\n\ncd ' + output_dir + '\n./executable.sh')
+        f.close()
             
 
 if __name__ == '__main__':
