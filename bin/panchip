@@ -3,6 +3,7 @@
 import os
 import sys
 import argparse
+import subprocess
 import PanChIP.commands as commands
 
 class Panchip(object):
@@ -32,8 +33,6 @@ class Panchip(object):
         parser = commands.init_parser()
 
         args = parser.parse_args(argv[2:])
-        
-        import subprocess
 
         lib_dir = os.path.abspath(args.library_directory)
         os.makedirs(lib_dir, exist_ok = True)
@@ -56,6 +55,14 @@ class Panchip(object):
         parser = commands.analysis_parser()
 
         args = parser.parse_args(argv[2:])
+        
+        lib_dir = os.path.abspath(args.library_directory)
+        input_dir = os.path.abspath(args.input_directory)
+        output_dir = os.path.abspath(args.output_directory)
+        
+        
+        
+        f = open("guru99.txt","w+")
             
 
 if __name__ == '__main__':
