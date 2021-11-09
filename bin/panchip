@@ -94,7 +94,8 @@ class Panchip(object):
         f = open(output_dir + '/analysis.sh','w+')
         f.write('#!/bin/bash\n\ncd ' + output_dir + '\n./executable.sh')
         f.close()
-            
-
+        
+        subprocess.call(['sh', output_dir + '/analysis.sh'])
+        
 if __name__ == '__main__':
     Panchip()
