@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/PanChIP.svg)](https://badge.fury.io/py/PanChIP)
 
-**Pan-ChIP-seq Analysis of Peak Sets**
+**Pan-ChIP-seq Analysis of Protein Colocalization**
 
 ## Installation
 ```shell
