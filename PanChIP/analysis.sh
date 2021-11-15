@@ -17,7 +17,10 @@ var=$(awk '{if(NR=='$cnt') {output=$1}} END{print output}' $lib/SUMdivbyWC.count
 float=$((${numlib%.*}/${var%.*}))
 for rep in $(seq 1 1 $repeat)
 do
-shuf -r -n ${float%.*} $lib/$cnt.bed | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\n",$1,$2,$3,NR,$5,$6}' > $lib/$rep/$cnt.bed &
+  if [ $(jobs -r | wc -l) -ge $threads ]; then
+    wait $(jobs -r -p | head -1)
+  fi
+  (shuf -r -n ${float%.*} $lib/$cnt.bed | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\n",$1,$2,$3,NR,$5,$6}' > $lib/$rep/$cnt.bed) &
 done
 printf ""
 wait
@@ -55,7 +58,10 @@ var=$(awk '{if(NR=='$cnt') {output=$1}} END{print output}' $input/SUMdivbyWC.cou
 float=$((${numinput%.*}/${var%.*}))
 for rep in $(seq 1 1 $repeat)
 do
-shuf -r -n ${float%.*} $input/$(echo $inputfiles | awk -F ' ' '{printf "%s", $'$cnt'}').bed | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\n",$1,$2,$3,NR,$5,$6}' > $input/$rep/$(echo $inputfiles | awk -F ' ' '{printf "%s", $'$cnt'}').bed &
+  if [ $(jobs -r | wc -l) -ge $threads ]; then
+    wait $(jobs -r -p | head -1)
+  fi
+  (shuf -r -n ${float%.*} $input/$(echo $inputfiles | awk -F ' ' '{printf "%s", $'$cnt'}').bed | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\n",$1,$2,$3,NR,$5,$6}' > $input/$rep/$(echo $inputfiles | awk -F ' ' '{printf "%s", $'$cnt'}').bed) &
 done
 printf ""
 wait
@@ -64,7 +70,10 @@ for rep in $(seq 1 1 $repeat)
 do
 for cnt in $(seq 1 1 $TR)
 do
-rep2sum "$cnt" "$rep" &
+  if [ $(jobs -r | wc -l) -ge $threads ]; then
+    wait $(jobs -r -p | head -1)
+  fi
+  (rep2sum "$cnt" "$rep") &
 done
 printf ""
 wait
