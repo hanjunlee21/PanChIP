@@ -53,6 +53,7 @@ positional arguments:
   library_directory  Directory wherein PanChIP library was stored.
   input_directory    Input directory wherein peak sets in the format of .bed
                      files are located.
+                     (.bed6 format with numeric scores in 5th column required)
   output_directory   Output directory wherein output files will be stored.
 
 optional arguments:
