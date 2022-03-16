@@ -76,6 +76,7 @@ class Panchip(object):
         f.write('#!/bin/bash\nls ' + input_dir + ' | awk \'{printf "%s ", $1}\' | sed \'s/.bed//g\' > ' + output_dir + '/bedfiles.txt')
         f.close()
         
+        subprocess.call(['chmod', 'u+x', output_dir + '/bedfiles.sh'])
         subprocess.call(['sh', output_dir + '/bedfiles.sh'])
         
         input_list = open(output_dir + '/bedfiles.txt', 'r').read().rstrip()
@@ -94,7 +95,8 @@ class Panchip(object):
         f = open(output_dir + '/analysis.sh','w+')
         f.write('#!/bin/bash\n\ncd ' + output_dir + '\n./executable.sh')
         f.close()
-        
+
+        subprocess.call(['chmod', 'u+x', output_dir + '/analysis.sh'])
         subprocess.call(['sh', output_dir + '/analysis.sh'])
         
 if __name__ == '__main__':
