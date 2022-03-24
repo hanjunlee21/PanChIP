@@ -16,7 +16,8 @@ pip install panchip
 ```shell
 Commands:
     init            Initialization of the PanChIP library
-    analysis        Analysis of a list peat sets
+    analysis        Analysis of a list peak sets
+    filter          Filtering library for quality control
 Run panchip <command> -h for help on a specific command.
 
 PanChIP: Pan-ChIP-seq Analysis of Peak Sets
@@ -47,7 +48,7 @@ optional arguments:
 
 ```shell
 
-Analysis of a list peat sets
+Analysis of a list peak sets
 
 positional arguments:
   library_directory  Directory wherein PanChIP library was stored.
@@ -60,4 +61,21 @@ optional arguments:
   -h, --help         show this help message and exit
   -t THREADS         Number of threads to use. (default: 1)
   -r REPEATS         Number of repeats to perform. (default: 1)
+```
+
+### panchip filter [-h] [-t THREADS] library_directory input_file output_directory
+
+```shell
+
+Filtering library for quality control
+
+positional arguments:
+  library_directory  Directory wherein PanChIP library was stored.
+  input_file         Path to the input .bed file.
+                     (.bed6 format with numeric scores in 5th column required)
+  output_directory   Output directory wherein output files will be stored.
+
+optional arguments:
+  -h, --help         show this help message and exit
+  -t THREADS         Number of threads to use. (default: 1)
 ```
