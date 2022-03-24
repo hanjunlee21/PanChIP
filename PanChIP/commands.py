@@ -7,7 +7,8 @@ def panchip_parser():
         panchip <command> [options]
         Commands:
             init            Initialization of the PanChIP library
-            analysis        Analysis of a list peat sets
+            analysis        Analysis of a list peak sets
+            filter          Filtering library for quality control
         Run panchip <command> -h for help on a specific command.
         '''
     parser = argparse.ArgumentParser(
@@ -38,7 +39,7 @@ def init_parser():
       
 def analysis_parser():
     parser = MyParser(
-        description='Analysis of a list peat sets',
+        description='Analysis of a list peak sets',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         prog='panchip analysis'
     )
@@ -71,6 +72,37 @@ def analysis_parser():
         type=int,
         default=1,
         help='Number of repeats to perform.')
+
+    return parser
+        
+def filter_parser():
+    parser = MyParser(
+        description='Filtering library for quality control',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        prog='panchip filter'
+    )
+        
+    parser.add_argument(
+        'library_directory',
+        type=str,
+        help='Directory wherein PanChIP library was stored.')
+
+    parser.add_argument(
+        'input_file',
+        type=str,
+        help='Path to the input .bed file.')
+       
+    parser.add_argument(
+        'output_directory',
+        type=str,
+        help='Output directory wherein output files will be stored.')
+    
+    parser.add_argument(
+        '-t',
+        dest='threads',
+        type=int,
+        default=1,
+        help='Number of threads to use.')
 
     return parser
         
