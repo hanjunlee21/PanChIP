@@ -7,7 +7,7 @@ import subprocess
 import PanChIP.commands as commands
 from PanChIP.version import __version__
 
-lib_name = 'v.1.0'
+lib_name = 'v.2.0'
 
 class Panchip(object):
 
