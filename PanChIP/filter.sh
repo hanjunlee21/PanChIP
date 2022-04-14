@@ -101,4 +101,4 @@ for file in SUM SUMdivbyWC WC
 do
 mv $input/$file.count $output/input.stat/$file.count
 done
-printf "Completed PanChIP analysis!\n"
+printf "Completed PanChIP filter!\n"
