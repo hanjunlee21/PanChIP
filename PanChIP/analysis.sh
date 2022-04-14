@@ -1,5 +1,5 @@
 numlib=$(awk -v max=0 '{if($1>max){max=$1}}END{printf "%d", max}' $lib/SUM.count)
-TR="928"
+TR="639"
 blnk=$(grep -o ' ' <<< "$inputfiles" | wc -l)
 sedinput=$(sed 's/\//\\\//g' <<< "$input")
 sedoutput=$(sed 's/\//\\\//g' <<< "$output")
