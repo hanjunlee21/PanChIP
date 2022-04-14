@@ -9,6 +9,16 @@ from PanChIP.version import __version__
 
 lib_name = 'v.2.0'
 
+def remove_prefix(input_string, prefix):
+    if prefix and input_string.startswith(prefix):
+        return input_string[:len(prefix)]
+    return input_string
+
+def remove_suffix(input_string, suffix):
+    if suffix and input_string.endswith(suffix):
+        return input_string[:-len(suffix)]
+    return input_string
+
 class Panchip(object):
 
     def __init__(self):
@@ -109,7 +119,7 @@ class Panchip(object):
         os.makedirs(output_dir, exist_ok = True)
         
         f = open(output_dir + '/executable.sh','w+')
-        f.write('#!/bin/bash\n\ninputfiles="' + input_dir.removeprefix(os.path.dirname(args.input_file)).removesuffix('.bed') + '"\ninput="' + os.path.dirname(args.input_file) + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\n"')
+        f.write('#!/bin/bash\n\ninputfiles="' + remove_suffix(remove_prefix(input_dir, os.path.dirname(args.input_file)), '.bed') + '"\ninput="' + os.path.dirname(args.input_file) + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\n"')
         
         with open(lib_dir + '/PanChIP-v.' + __version__ + '/PanChIP/filter.sh') as infile:
             for line in infile:
