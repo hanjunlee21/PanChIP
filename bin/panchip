@@ -64,11 +64,47 @@ class Panchip(object):
 
         args = parser.parse_args(argv[2:])
         
-        lib_dir = os.path.abspath(args.library_directory)
+        lib_dir = os.path.abspath(args.library_directory + '/TR')
         input_dir = os.path.abspath(args.input_directory)
         output_dir = os.path.abspath(args.output_directory)
         thread = str(args.threads)
         repeat = str(args.repeats)
+        
+        os.makedirs(output_dir, exist_ok = True)
+        
+        f = open(output_dir + '/bedfiles.sh','w+')
+        f.write('#!/bin/bash\nls ' + input_dir + ' | awk \'{printf "%s ", $1}\' | sed \'s/.bed//g\' > ' + output_dir + '/bedfiles.txt')
+        f.close()
+        
+        subprocess.call(['sh', output_dir + '/bedfiles.sh'])
+        
+        input_list = open(output_dir + '/bedfiles.txt', 'r').read().rstrip()
+        subprocess.call(['rm', output_dir + '/bedfiles.sh'])
+        subprocess.call(['rm', output_dir + '/bedfiles.txt'])
+        
+        f = open(output_dir + '/executable.sh','w+')
+        f.write('#!/bin/bash\n\ninputfiles="' + input_list + '"\ninput="' + input_dir + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\nrepeat="' + repeat + '"\n\n')
+        
+        with open(lib_dir + '/PanChIP-v.' + __version__ + '/PanChIP/analysis.sh') as infile:
+            for line in infile:
+                f.write(line)
+                
+        f.close()
+        
+        f = open(output_dir + '/analysis.sh','w+')
+        f.write('#!/bin/bash\n\ncd ' + output_dir + '\nchmod u+x ./executable.sh\n./executable.sh')
+        f.close()
+        subprocess.call(['sh', output_dir + '/analysis.sh'])
+        
+    def filter(self, argv):
+        parser = commands.filter_parser()
+
+        args = parser.parse_args(argv[2:])
+        
+        lib_dir = os.path.abspath(args.library_directory + '/Experiment')
+        input_dir = os.path.abspath(args.input_file)
+        output_dir = os.path.abspath(args.output_directory)
+        thread = str(args.threads)
         
         os.makedirs(output_dir, exist_ok = True)
         
