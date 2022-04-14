@@ -109,7 +109,7 @@ class Panchip(object):
         os.makedirs(output_dir, exist_ok = True)
         
         f = open(output_dir + '/executable.sh','w+')
-        f.write('#!/bin/bash\n\ninputfiles="' + input_dir + '"\ninput="' + os.path.dirname(args.input_file) + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\n"')
+        f.write('#!/bin/bash\n\ninputfiles="' + input_dir.removeprefix(os.path.dirname(args.input_file)).removesuffix('.bed') + '"\ninput="' + os.path.dirname(args.input_file) + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\n"')
         
         with open(lib_dir + '/PanChIP-v.' + __version__ + '/PanChIP/filter.sh') as infile:
             for line in infile:
