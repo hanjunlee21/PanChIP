@@ -1,5 +1,6 @@
+repeat="1"
 numlib=$(awk -v max=0 '{if($1>max){max=$1}}END{printf "%d", max}' $lib/SUM.count)
-TR="639"
+Experiment="7603"
 blnk=$(grep -o ' ' <<< "$inputfiles" | wc -l)
 sedinput=$(sed 's/\//\\\//g' <<< "$input")
 sedoutput=$(sed 's/\//\\\//g' <<< "$output")
@@ -11,7 +12,7 @@ for rep in $(seq 1 1 $repeat)
 do
 mkdir -p $lib/$rep
 done
-for cnt in $(seq 1 1 $TR)
+for cnt in $(seq 1 1 $Experiment)
 do
 var=$(awk '{if(NR=='$cnt') {output=$1}} END{print output}' $lib/SUMdivbyWC.count)
 float=$((${numlib%.*}/${var%.*}))
