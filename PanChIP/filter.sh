@@ -1,7 +1,7 @@
 repeat="1"
 numlib=$(awk -v max=0 '{if($1>max){max=$1}}END{printf "%d", max}' $lib/SUM.count)
 Experiment="7603"
-blnk=$(grep -o ' ' <<< "$inputfiles" | wc -l)
+blnk="0"
 sedinput=$(sed 's/\//\\\//g' <<< "$input")
 sedoutput=$(sed 's/\//\\\//g' <<< "$output")
 sedlib=$(sed 's/\//\\\//g' <<< "$lib")
