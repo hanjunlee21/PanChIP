@@ -1,4 +1,3 @@
-numlib=$(awk -v max=0 '{if($1>max){max=$1}}END{printf "%d", max}' $lib/SUM.count)
 Experiment="7603"
 sedinput=$(sed 's/\//\\\//g' <<< "$input")
 sedoutput=$(sed 's/\//\\\//g' <<< "$output")
@@ -25,7 +24,6 @@ lib2wc "$i"
 done
 echo $inputfiles | sed -e 's/ /.sum '$sedinput'\//g' -e 's/^/'$sedinput'\//' -e 's/$/.sum/' | xargs cat > $input/SUM.count
 echo $inputfiles | sed -e 's/ /.sum '$sedinput'\//g' -e 's/^/'$sedinput'\//' -e 's/$/.sum/' | xargs rm
-numinput=$(awk -v min=$numlib '{if($1<min){min=$1}}END{printf "%d", min}' $input/SUM.count)
 echo $inputfiles | sed -e 's/ /.wc '$sedinput'\//g' -e 's/^/'$sedinput'\//' -e 's/$/.wc/' | xargs cat > $input/WC.count
 echo $inputfiles | sed -e 's/ /.wc '$sedinput'\//g' -e 's/^/'$sedinput'\//' -e 's/$/.wc/' | xargs rm
 paste $input/SUM.count $input/WC.count | awk '{print $1/$2}' > $input/SUMdivbyWC.count
