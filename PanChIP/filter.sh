@@ -90,10 +90,10 @@ wait
 echo $inputfiles | sed -e 's/ /.txt '$sedoutput'\//g' -e 's/^/'$sedlib'\/Experiment.txt '$sedoutput'\//' -e 's/$/.txt/' | xargs paste | awk 'BEGIN{print "'$(sed -e 's/ /\\t/g' -e 's/^/TR\\tExperiment\\t/' <<< $inputfiles)'"} {print}' > $output/primary.output.tsv
 for file in $inputfiles
 do
-rm $output/$file.txt
+# rm $output/$file.txt
 done
-rm -r $lib/$rep
-rm -r $output/$rep
+# rm -r $lib/$rep
+# rm -r $output/$rep
 mkdir -p $output/input.stat
 for file in SUM SUMdivbyWC WC
 do
