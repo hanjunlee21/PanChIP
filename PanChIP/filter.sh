@@ -87,7 +87,7 @@ do
   (task2 "$file") &
 done
 wait
-echo $inputfiles | sed -e 's/ /.txt '$sedoutput'\//g' -e 's/^/'$sedlib'\/Experiment.txt '$sedoutput'\//' -e 's/$/.txt/' | xargs paste | awk 'BEGIN{print "'$(sed -e 's/ /\\t/g' -e 's/^/TR\\t/' <<< $inputfiles)'"} {print}' > $output/primary.output.tsv
+echo $inputfiles | sed -e 's/ /.txt '$sedoutput'\//g' -e 's/^/'$sedlib'\/Experiment.txt '$sedoutput'\//' -e 's/$/.txt/' | xargs paste | awk 'BEGIN{print "'$(sed -e 's/ /\\t/g' -e 's/^/TR\\tExperiment\\t/' <<< $inputfiles)'"} {print}' > $output/primary.output.tsv
 for file in $inputfiles
 do
 rm $output/$file.txt
