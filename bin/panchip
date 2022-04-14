@@ -108,29 +108,19 @@ class Panchip(object):
         
         os.makedirs(output_dir, exist_ok = True)
         
-        f = open(output_dir + '/bedfiles.sh','w+')
-        f.write('#!/bin/bash\nls ' + input_dir + ' | awk \'{printf "%s ", $1}\' | sed \'s/.bed//g\' > ' + output_dir + '/bedfiles.txt')
-        f.close()
-        
-        subprocess.call(['sh', output_dir + '/bedfiles.sh'])
-        
-        input_list = open(output_dir + '/bedfiles.txt', 'r').read().rstrip()
-        subprocess.call(['rm', output_dir + '/bedfiles.sh'])
-        subprocess.call(['rm', output_dir + '/bedfiles.txt'])
-        
         f = open(output_dir + '/executable.sh','w+')
-        f.write('#!/bin/bash\n\ninputfiles="' + input_list + '"\ninput="' + input_dir + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\nrepeat="' + repeat + '"\n\n')
+        f.write('#!/bin/bash\n\ninputfiles="' + input_dir[:-4] + '"\ninput="' + input_dir[:-4] + '"\noutput="' + output_dir + '"\nlib="' + lib_dir + '/' + lib_name + '"\nthreads="' + thread + '"\n"')
         
-        with open(lib_dir + '/PanChIP-v.' + __version__ + '/PanChIP/analysis.sh') as infile:
+        with open(lib_dir + '/PanChIP-v.' + __version__ + '/PanChIP/filter.sh') as infile:
             for line in infile:
                 f.write(line)
                 
         f.close()
         
-        f = open(output_dir + '/analysis.sh','w+')
+        f = open(output_dir + '/filter.sh','w+')
         f.write('#!/bin/bash\n\ncd ' + output_dir + '\nchmod u+x ./executable.sh\n./executable.sh')
         f.close()
-        subprocess.call(['sh', output_dir + '/analysis.sh'])
+        subprocess.call(['sh', output_dir + '/filter.sh'])
         
 if __name__ == '__main__':
     Panchip()
