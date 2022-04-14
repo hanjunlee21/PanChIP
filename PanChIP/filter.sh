@@ -1,15 +1,30 @@
 numlib=$(awk -v max=0 '{if($1>max){max=$1}}END{printf "%d", max}' $lib/SUM.count)
-Experiment="7603"
-blnk="0"
+TR="7603"
+blnk=$(grep -o ' ' <<< "$inputfiles" | wc -l)
 sedinput=$(sed 's/\//\\\//g' <<< "$input")
 sedoutput=$(sed 's/\//\\\//g' <<< "$output")
 sedlib=$(sed 's/\//\\\//g' <<< "$lib")
 
-printf "Running PanChIP filter...\n"
-for cnt in $(seq 1 1 $Experiment)
+printf "Running PanChIP analysis...\n"
+printf "Creating repeats of library...\n"
+for rep in $(seq 1 1 $repeat)
+do
+mkdir -p $lib/$rep
+done
+for cnt in $(seq 1 1 $TR)
 do
 var=$(awk '{if(NR=='$cnt') {output=$1}} END{print output}' $lib/SUMdivbyWC.count)
 float=$((${numlib%.*}/${var%.*}))
+for rep in $(seq 1 1 $repeat)
+do
+  if [ $(jobs -r | wc -l) -ge $threads ]; then
+    wait $(jobs -r -p | head -1)
+  fi
+  (shuf -r -n ${float%.*} $lib/$cnt.bed | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\n",$1,$2,$3,NR,$5,$6}' > $lib/$rep/$cnt.bed) &
+done
+printf ""
+wait
+done
 
 lib2sum() {
 sort -u -k1,1 -k2,2n -k3,3n -k4,4n $input/$1.bed | awk 'function abs(v) {return v < 0 ? -v : v} BEGIN{var=0} {var=var+$5*abs($3-$2)} END{print var}' > $input/$1.sum
