@@ -51,7 +51,7 @@ catfunc "$output/$2/$1/intersect" "$sedoutput\/$2\/$1\/intersect"
 catfunc "$output/$2/$1/intersect2" "$sedoutput\/$2\/$1\/intersect2"
 rm $output/$2/$1/intersect.*.count
 rm $output/$2/$1/intersect2.*.count
-sort -u -k1,1 -k2,2n -k3,3n -k4,4n $input/$2/$1.bed | awk 'function abs(v) {return v < 0 ? -v : v} BEGIN{var=0} {var=var+$5*abs($3-$2)} END{print var}' > $output/$2/$1/$1.dist
+sort -u -k1,1 -k2,2n -k3,3n -k4,4n $input/$1.bed | awk 'function abs(v) {return v < 0 ? -v : v} BEGIN{var=0} {var=var+$5*abs($3-$2)} END{print var}' > $output/$2/$1/$1.dist
 awk '{for(i=1;i<='$Experiment';i++) {print}}' $output/$2/$1/$1.dist > $output/$2/$1/$1.tmp
 paste $output/$2/$1/intersect.dist $output/$2/$1/intersect2.dist $lib/$2/SUM.count $output/$2/$1/$1.tmp | awk '{print sqrt($1*$2/$3/$4)}' > $output/$2/$1/intersect.normalized.dist
 rm $output/$2/$1/$1.tmp $output/$2/$1/intersect.dist $output/$2/$1/intersect2.dist
