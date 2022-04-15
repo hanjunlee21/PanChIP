@@ -54,7 +54,7 @@ class Panchip(object):
         
         lib_zip_path = lib_dir + '/' + lib_name + '.zip'
         
-        subprocess.call(['gdown', '-O', lib_zip_path, 'https://drive.google.com/file/d/17L0c1pv8dx2906O7WMfWwcqgDLMJyq7T'])
+        subprocess.call(['gdown', '-O', lib_zip_path, 'https://drive.google.com/uc?id=17L0c1pv8dx2906O7WMfWwcqgDLMJyq7T'])
         
         import zipfile
         
