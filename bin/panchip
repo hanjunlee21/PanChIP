@@ -7,7 +7,7 @@ import subprocess
 import PanChIP.commands as commands
 from PanChIP.version import __version__
 
-lib_name = 'v.2.0'
+lib_name = 'v.3.0'
 
 def remove_prefix(input_string, prefix):
     if prefix and input_string.startswith(prefix):
