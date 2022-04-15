@@ -33,7 +33,7 @@ def init_parser():
     parser.add_argument(
         'library_directory',
         type=str,
-        help='Directory wherein PanChIP library will be stored. > 4.2 GB of storage required.')
+        help='Directory wherein PanChIP library will be stored. > 13.6 GB of storage required.')
 
     return parser
       
