@@ -66,7 +66,7 @@ done
 subtask2 "$1" "$2"
 }
 task2() {
-echo $rep | sed 's:.*:'$sedoutput'\/&\/'$1'\/intersect.normalized.dist:' | xargs paste -d ' ' | numsum -r | awk '{print $1/'$rep'}' > $output/$1.txt
+cp $output/$rep/$1/intersect.normalized.dist $output/$1.txt
 }
 
 mkdir -p $output
@@ -107,7 +107,7 @@ connectivitymean=$(awk 'BEGIN{sum=0;} {sum=sum+$1} END{if('$connectivityn'==0) {
 awk 'BEGIN{sum=0;} {sum=sum+($1-'$connectivitymean')*($1-'$connectivitymean')} END{if('$connectivityn'==0) {printf "NA\n"} else {printf "%s\n", sqrt(sum/'$connectivityn')}}' $output/$rep/$i.tf >> $output/$rep/std.dist
 rm $output/$rep/$i.tf
 done
-paste $lib/../Analysis/Analysis.txt $output/$rep/mean.dist $output/$rep/std.dist | awk 'BEGIN{printf "TF\tMean\tStandard Deviation\tSignal-to-noise Ratio\tFilter\n"} {if($3=="NA"||$3==0) {printf "%s\t%s\t%s\tNA\tFAIL\n",$1,$2,$3} else {if($2/$3>10) {printf "%s\t%s\t%s\t%s\tPASS\n",$1,$2,$3,$2/$3} else {printf "%s\t%s\t%s\t%s\tFAIL\n",$1,$2,$3,$2/$3}}}' > $output/statistics.tsv
+paste $lib/../Analysis/Analysis.txt $output/$rep/mean.dist $output/$rep/std.dist | awk 'BEGIN{printf "TF\tMean\tStandard Deviation\tSignal-to-noise Ratio\tFilter\n"} {if($3=="NA"||$3==0) {printf "%s\t%s\t%s\tNA\tFAIL\n",$1,$2,$3} else {if($2/$3>2) {printf "%s\t%s\t%s\t%s\tPASS\n",$1,$2,$3,$2/$3} else {printf "%s\t%s\t%s\t%s\tFAIL\n",$1,$2,$3,$2/$3}}}' > $output/statistics.tsv
 rm $output/primary.output.tmp
 for file in $inputfiles
 do
