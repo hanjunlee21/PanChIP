@@ -1,3 +1,4 @@
+Analysis="915"
 Filter="7619"
 sedinput=$(sed 's/\//\\\//g' <<< "$input")
 sedoutput=$(sed 's/\//\\\//g' <<< "$output")
@@ -88,6 +89,26 @@ do
 done
 wait
 echo $inputfiles | sed -e 's/ /.txt '$sedoutput'\//g' -e 's/^/'$sedlib'\/Filter.txt '$sedoutput'\//' -e 's/$/.txt/' | xargs paste | awk 'BEGIN{print "'$(sed -e 's/ /\\t/g' -e 's/^/TF\\tExperiment\\t/' <<< $inputfiles)'"} {print}' > $output/primary.output.tsv
+awk '{if(NR>1) {print $3}}' $output/primary.output.tsv > $output/primary.output.tmp
+
+for i in $(seq 1 1 $Analysis)
+do
+touch $output/$rep/$i.tf
+touch $output/$rep/mean.dist
+touch $output/$rep/std.dist
+connectivity=$(awk '{if(NR=='$i') {print}}' $lib/Connectivity.txt)
+connectivityn=$(awk '{if(NR=='$i') {print}}' $lib/Connectivity.txt | awk '{if(length($0)==0) {print 0} else {print gsub(/ /, "")+1}}')
+for file in $(awk '{if(NR=='$i') {print}}' $lib/Connectivity.txt | sed 's/ /\n/g')
+do
+awk '{if(NR=='$file') {print}}' $output/primary.output.tmp >> $output/$rep/$i.tf
+done
+awk 'BEGIN{sum=0;} {sum=sum+$1} END{if('$connectivityn'==0) {print 0} else {print sum/'$connectivityn'}}' $output/$rep/$i.tf >> $output/$rep/mean.dist 
+connectivitymean=$(awk 'BEGIN{sum=0;} {sum=sum+$1} END{if('$connectivityn'==0) {print 0} else {print sum/'$connectivityn'}}' $output/$rep/$i.tf)
+awk 'BEGIN{sum=0;} {sum=sum+($1-'$connectivitymean')*($1-'$connectivitymean')} END{if('$connectivityn'==0) {printf "NA\n"} else {printf "%s\n", sqrt(sum/'$connectivityn')}}' $output/$rep/$i.tf >> $output/$rep/std.dist
+rm $output/$rep/$i.tf
+done
+paste $lib/../Analysis/Analysis.txt $output/$rep/mean.dist $output/$rep/std.dist | awk 'BEGIN{printf "TF\tMean\tStandard Deviation\tSignal-to-noise Ratio\tFilter\n"} {if($3=="NA"||$3==0) {printf "%s\t%s\t%s\tNA\tFAIL\n",$1,$2,$3} else {if($2/$3>10) {printf "%s\t%s\t%s\t%s\tPASS\n",$1,$2,$3,$2/$3} else {printf "%s\t%s\t%s\t%s\tFAIL\n",$1,$2,$3,$2/$3}}}' > $output/statistics.tsv
+rm $output/primary.output.tmp
 for file in $inputfiles
 do
 rm $output/$file.txt
