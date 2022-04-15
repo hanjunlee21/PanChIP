@@ -37,7 +37,7 @@ optional arguments:
 Initialization of the PanChIP library
 
 positional arguments:
-  library_directory  Directory wherein PanChIP library will be stored. > 4.2
+  library_directory  Directory wherein PanChIP library will be stored. > 13.6
                      GB of storage required.
 
 optional arguments:
