@@ -6,7 +6,7 @@
 
 ## Installation
 ```shell
-pip install panchip
+pip3 install panchip
 ```
 
 ## Usage
