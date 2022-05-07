@@ -28,6 +28,7 @@ setup(
           'gdown',
           'argparse',
           'pandas',
+          'scipy',
       ],
   scripts=['bin/panchip'],
   classifiers=[
