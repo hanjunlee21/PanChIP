@@ -4,6 +4,8 @@ import os
 import sys
 import argparse
 import subprocess
+import pandas as pd
+from scipy import stats
 import PanChIP.commands as commands
 from PanChIP.version import __version__
 
@@ -131,6 +133,9 @@ class Panchip(object):
         f.write('#!/bin/bash\n\ncd ' + output_dir + '\nchmod u+x ./executable.sh\n./executable.sh')
         f.close()
         subprocess.call(['sh', output_dir + '/filter.sh'])
+        
+        df = pd.read_csv(output_dir + '/primary.output.tsv', sep='\t', names = ["TF","Experiment","Input"])
+        df.groupby 
         
 if __name__ == '__main__':
     Panchip()
