@@ -4,6 +4,7 @@ import os
 import sys
 import argparse
 import subprocess
+import math
 import pandas as pd
 from scipy import stats
 import PanChIP.commands as commands
@@ -134,8 +135,22 @@ class Panchip(object):
         f.close()
         subprocess.call(['sh', output_dir + '/filter.sh'])
         
-        df = pd.read_csv(output_dir + '/primary.output.tsv', sep='\t', names = ["TF","Experiment","Input"])
-        df.groupby 
+        df = pd.read_csv(output_dir + '/primary.output.tsv', sep='\t', header=1, names = ["TF","Experiment","Input"])
+        st = pd.read_csv(output_dir + '/statistics.tsv', sep='\t', header=1, names=["TF","Mean","Standard Deviation","Signal-to-noise Ratio","Filter"])
+        
+        f = open(output_dir + '/adjusted_P.txt','w+')
+        f.write('adjusted P\n')
+        for tf in st['TF']:
+            tfdf = df[(df['TF'] == tf)]
+            welch = stats.ttest_ind(tfdf['Input'], df['Input'], equal_var = False)
+            adjp = welch.pvalue*math.sqrt(len(st['TF']))
+            f.write(str(adjp)+'\n')
+        f.close()
+        f = open(output_dir + '/adjusted_P.sh','w+')
+        f.write('#!/bin/bash\n\ncd ' + output_dir + '\npaste statistics.tsv adjusted_P.txt > statistics.tmp\nrm statistics.tsv adjusted_P.txt\nmv statistics.tmp statistics.tsv\n')
+        f.close()
+        subprocess.call(['sh', output_dir + '/adjusted_P.sh'])
+        subprocess.call(['rm', output_dir + '/adjusted_P.sh'])
         
 if __name__ == '__main__':
     Panchip()
