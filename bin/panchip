@@ -135,8 +135,8 @@ class Panchip(object):
         f.close()
         subprocess.call(['sh', output_dir + '/filter.sh'])
         
-        df = pd.read_csv(output_dir + '/primary.output.tsv', sep='\t', header=1, names = ["TF","Experiment","Input"])
-        st = pd.read_csv(output_dir + '/statistics.tsv', sep='\t', header=1, names=["TF","Mean","Standard Deviation","Signal-to-noise Ratio","Filter"])
+        df = pd.read_csv(output_dir + '/primary.output.tsv', sep='\t', header=0, names = ["TF","Experiment","Input"])
+        st = pd.read_csv(output_dir + '/statistics.tsv', sep='\t', header=0, names=["TF","Mean","Standard Deviation","Signal-to-noise Ratio","Filter"])
         
         f = open(output_dir + '/adjusted_P.txt','w+')
         f.write('Adjusted P\n')
@@ -147,7 +147,7 @@ class Panchip(object):
             f.write(str(adjp)+'\n')
         f.close()
         f = open(output_dir + '/adjusted_P.sh','w+')
-        f.write('#!/bin/bash\n\ncd ' + output_dir + '\npaste statistics.tsv adjusted_P.txt | awk -F \'\t\' \'{if(NR==1) {printf "%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n",$1,$2,$3,$4,$6,$5} else if(NR>1&&$2>=0) {if($4>2&&$6<0.05) {filter="PASS"} else {filter="FAIL"}; printf "%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n",$1,$2,$3,$4,$6,filter}}\'> statistics.tmp\nrm statistics.tsv adjusted_P.txt\nmv statistics.tmp statistics.tsv\n')
+        f.write('#!/bin/bash\n\ncd ' + output_dir + '\nsed -i \'s/nan/NA/g\' adjusted_P.txt\npaste statistics.tsv adjusted_P.txt | awk -F \'\t\' \'{if(NR==1) {printf "%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n",$1,$2,$3,$4,$6,$5} else if(NR>1&&$2>=0) {if($4>2&&$6<0.05) {filter="PASS"} else {filter="FAIL"}; printf "%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n",$1,$2,$3,$4,$6,filter}}\'> statistics.tmp\nrm statistics.tsv adjusted_P.txt\nmv statistics.tmp statistics.tsv\n')
         f.close()
         subprocess.call(['sh', output_dir + '/adjusted_P.sh'])
         subprocess.call(['rm', output_dir + '/adjusted_P.sh'])
