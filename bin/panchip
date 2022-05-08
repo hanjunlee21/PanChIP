@@ -143,7 +143,7 @@ class Panchip(object):
         for tf in st['TF']:
             tfdf = df[(df['TF'] == tf)]
             welch = stats.ttest_ind(tfdf['Input'], df['Input'], equal_var = False)
-            adjp = welch.pvalue*math.sqrt(len(st['TF']))
+            adjp = min(welch.pvalue*math.sqrt(len(st['TF'])), 1)
             f.write(str(adjp)+'\n')
         f.close()
         f = open(output_dir + '/adjusted_P.sh','w+')
