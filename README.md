@@ -4,7 +4,7 @@
 
 **Pan-ChIP-seq Analysis of Protein Colocalization Using Peak Sets**
 
-The current version of PanChIP supports hg38 assembly. 
+The current version of PanChIP supports the hg38 genome assembly. 
 
 ## Installation
 ```shell
