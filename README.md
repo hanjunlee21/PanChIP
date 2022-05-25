@@ -84,12 +84,12 @@ optional arguments:
 
 ## Citation
 
-**Sanidas I, Lee H, Rumde PH, Boulay G, Morris R, Golczer G, Stanzione M, Hajizadeh S, Zhong J, Ryan MB, Corcoran RB, Drapkin BJ, Rivera MN, Dyson NJ, and Lawrence MS. Chromatin-bound RB targets promoters, enhancers, and CTCF-bound loci, and is redistributed by cell cycle progression. _Forthcoming_.**
+- **Sanidas I, Lee H, Rumde PH, Boulay G, Morris R, Golczer G, Stanzione M, Hajizadeh S, Zhong J, Ryan MB, Corcoran RB, Drapkin BJ, Rivera MN, Dyson NJ, and Lawrence MS. Chromatin-bound RB targets promoters, enhancers, and CTCF-bound loci, and is redistributed by cell cycle progression. _Forthcoming_.**
 
 The development of PanChIP was possible thanks to many groundbreaking works of fellow researchers. We highly recommend users to cite the Cistrome Data Browswer as well.
 
-**Zheng R, Wan C, Mei S, Qin Q, Wu Q, Sun H, Chen C-H, Brown M, Zhang X, Meyer CA, and Liu XS. Cistrome Data Browser: expanded datasets and new tools for gene regulatory analysis. _Nucleic Acids Research_ 47.D1, D729–D735 (2019).**
+- **Zheng R, Wan C, Mei S, Qin Q, Wu Q, Sun H, Chen C-H, Brown M, Zhang X, Meyer CA, and Liu XS. Cistrome Data Browser: expanded datasets and new tools for gene regulatory analysis. _Nucleic Acids Research_ 47.D1, D729–D735 (2019).**
 
 While the design of PanChIP is different from that of BART, we suggest users to also try out the BART software. PanChIP measures the overlap between peak sets, while BART assesses the predictability of profiles based on the library.
 
-**Wang Z, Civelek M, Miller CL, Sheffield NC, Guertin MJ, and Zang C. BART: a transcription factor prediction tool with query gene sets or epigenomic profiles. _Bioinformatics_ 34.16, 2867–2869 (2018).**
+- **Wang Z, Civelek M, Miller CL, Sheffield NC, Guertin MJ, and Zang C. BART: a transcription factor prediction tool with query gene sets or epigenomic profiles. _Bioinformatics_ 34.16, 2867–2869 (2018).**
