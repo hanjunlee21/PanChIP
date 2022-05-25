@@ -82,9 +82,13 @@ optional arguments:
   -t THREADS         Number of threads to use. (default: 1)
 ```
 
-## Citation
+## Primary Citation
+
+Please cite the original PanChIP paper for works that utilized the PanChIP software.
 
 - **Sanidas I, Lee H, Rumde PH, Boulay G, Morris R, Golczer G, Stanzione M, Hajizadeh S, Zhong J, Ryan MB, Corcoran RB, Drapkin BJ, Rivera MN, Dyson NJ, and Lawrence MS. Chromatin-bound RB targets promoters, enhancers, and CTCF-bound loci, and is redistributed by cell cycle progression. _Forthcoming_.**
+
+## Extended Citation
 
 The development of PanChIP was possible thanks to many groundbreaking works of fellow researchers. We highly recommend users to cite the Cistrome Data Browswer as well.
 
