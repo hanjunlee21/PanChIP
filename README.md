@@ -90,7 +90,7 @@ Please cite the original PanChIP paper for works that utilized the PanChIP softw
 
 ## Extended Citation
 
-The development of PanChIP was possible thanks to many groundbreaking works of fellow researchers. We highly recommend users to cite the Cistrome Data Browswer as well.
+The development of PanChIP was possible thanks to many groundbreaking works of fellow researchers. We highly recommend users to cite the Cistrome Data Browser as well.
 
 - **Zheng R, Wan C, Mei S, Qin Q, Wu Q, Sun H, Chen C-H, Brown M, Zhang X, Meyer CA, and Liu XS. Cistrome Data Browser: expanded datasets and new tools for gene regulatory analysis. _Nucleic Acids Research_ 47.D1, D729–D735 (2019).**
 
