@@ -4,7 +4,10 @@
 
 **Pan-ChIP-seq Analysis of Protein Colocalization Using Peak Sets**
 
-The current version of PanChIP supports the hg38 genome assembly. 
+The current version of PanChIP supports the hg38 genome assembly.
+
+Prerequisites: BEDTools, Python 3, Jobs (required for Memory management during parallelization)
+Input: PanChIP Analysis – Directory with only 6-column BED files, PanChIP Filter – one 6-column BED file
 
 ## Installation
 ```shell
