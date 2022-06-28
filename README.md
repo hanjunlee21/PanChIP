@@ -16,8 +16,8 @@ pip3 install panchip
 
 ## Input
 ```shell
-**PanChIP Analysis**: directory with only 6-column BED files
-**PanChIP Filter**: one 6-column BED file
+PanChIP Analysis: a directory with only 6-column BED files
+PanChIP Filter: a 6-column BED file
 
 We recommend most PanChIP users to utilize BED files with constant non-zero fifth column values (e.g., 1, 500, 1000).
 ```
