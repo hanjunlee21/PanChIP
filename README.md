@@ -7,6 +7,7 @@
 The current version of PanChIP supports the hg38 genome assembly.
 
 Prerequisites: BEDTools, Python 3, Jobs (required for Memory management during parallelization)
+
 Input: PanChIP Analysis – Directory with only 6-column BED files, PanChIP Filter – one 6-column BED file
 
 ## Installation
