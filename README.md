@@ -99,7 +99,7 @@ optional arguments:
 
 Please cite the original PanChIP paper for works that utilized the PanChIP software.
 
-- **Sanidas I, Lee H, Rumde PH, Boulay G, Morris R, Golczer G, Stanzione M, Hajizadeh S, Zhong J, Ryan MB, Corcoran RB, Drapkin BJ, Rivera MN, Dyson NJ, and Lawrence MS. Chromatin-bound RB targets promoters, enhancers, and CTCF-bound loci, and is redistributed by cell cycle progression. _Forthcoming_.**
+- **Sanidas I, Lee H, Rumde PH, Boulay G, Morris R, Golczer G, Stanzione M, Hajizadeh S, Zhong J, Ryan MB, Corcoran RB, Drapkin BJ, Rivera MN, Dyson NJ, and Lawrence MS. Chromatin-bound RB targets promoters, enhancers, and CTCF-bound loci, and is redistributed by cell cycle progression. _Molecular Cell_ 82.18 (2022).**
 
 ## Extended Citation
 
