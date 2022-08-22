@@ -1,8 +1,10 @@
 # PanChIP
+**Pan-ChIP-seq Analysis of Protein Colocalization Using Peak Sets**
 
 [![PyPI version](https://badge.fury.io/py/PanChIP.svg)](https://badge.fury.io/py/PanChIP)
+[![DOI](https://zenodo.org/badge/424777555.svg)](https://zenodo.org/badge/latestdoi/424777555)
 
-**Pan-ChIP-seq Analysis of Protein Colocalization Using Peak Sets**
+<br/>
 
 The current version of PanChIP supports the hg38 genome assembly.
 
