@@ -12,8 +12,14 @@ The current version of PanChIP supports the hg38 genome assembly.
 Python 3, BEDTools
 
 ## Installation
+**Installation by PyPI**
 ```shell
 pip3 install panchip
+```
+
+**Installation by Bioconda**
+```shell
+conda install bioconda::panchip
 ```
 
 ## Input
