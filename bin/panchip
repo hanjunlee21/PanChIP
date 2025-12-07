@@ -43,87 +43,87 @@ class Panchip(object):
         import PanChIP
         
         getattr(self, args.command)([sys.argv[0]] + sys.argv[option_ix:])
-            
+
     def init(self, argv):
         parser = commands.init_parser()
         args = parser.parse_args(argv[2:])
-    
+
         lib_dir = os.path.abspath(args.library_directory)
         os.makedirs(lib_dir, exist_ok=True)
-    
+
         # -------------------------------------------------------------
         # 1. Download split ZIP parts using Python
         # -------------------------------------------------------------
         import urllib.request
         import shutil
-    
+
         # Base URL where split files are hosted
         # Example: https://server/files  (no trailing slash)
         base_url = "https://your.server/path"   # TODO: update this
-    
+
         # Local filenames for downloaded split pieces
         split_files = [
             os.path.join(lib_dir, f"{lib_name}_split0.zip"),  # real: .zip (last part)
             os.path.join(lib_dir, f"{lib_name}_split1.zip"),  # real: .z01 (first)
             os.path.join(lib_dir, f"{lib_name}_split2.zip"),  # real: .z02 (second)
         ]
-    
+
         # Download each split piece
         for idx, path in enumerate(split_files):
             url = f"{base_url}/{lib_name}_split{idx}.zip"
             print(f"Downloading {url} -> {path}")
             with urllib.request.urlopen(url) as r, open(path, "wb") as f:
                 shutil.copyfileobj(r, f)
-    
+
         # -------------------------------------------------------------
         # 2. Combine split ZIP files into one full ZIP
         # Order must be: .z01, .z02, ..., .zip  → [1, 2, 0]
         # -------------------------------------------------------------
         combined_zip_path = os.path.join(lib_dir, lib_name + ".zip")
         print(f"Combining parts → {combined_zip_path}")
-    
+
         with open(combined_zip_path, "wb") as combined:
             for idx in [1, 2, 0]:
                 part = split_files[idx]
                 with open(part, "rb") as p:
                     shutil.copyfileobj(p, combined)
-    
+
         # Remove the downloaded split pieces
         for p in split_files:
             try:
                 os.remove(p)
             except:
                 pass
-    
+
         # -------------------------------------------------------------
         # 3. Extract the combined ZIP using Python
         # -------------------------------------------------------------
         import zipfile
-    
+
         print("Extracting ZIP...")
         with zipfile.ZipFile(combined_zip_path, "r") as z:
             z.extractall(lib_dir)
-    
+
         os.remove(combined_zip_path)
-    
+
         # -------------------------------------------------------------
         # 4. Download & extract PanChIP tar.gz using Python
         # -------------------------------------------------------------
         import tarfile
-    
+
         tar_url = f"https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.{__version__}.tar.gz"
         tar_path = os.path.join(lib_dir, f"v.{__version__}.tar.gz")
-    
+
         print(f"Downloading {tar_url} → {tar_path}")
         with urllib.request.urlopen(tar_url) as r, open(tar_path, "wb") as f:
             shutil.copyfileobj(r, f)
-    
+
         print("Extracting tar.gz...")
         with tarfile.open(tar_path, "r:gz") as tar:
             tar.extractall(lib_dir)
-    
+
         os.remove(tar_path)
-        
+
     def analysis(self, argv):
         parser = commands.analysis_parser()
 
@@ -203,6 +203,6 @@ class Panchip(object):
         f.close()
         subprocess.call(['sh', output_dir + '/adjusted_P.sh'])
         subprocess.call(['rm', output_dir + '/adjusted_P.sh'])
-        
+
 if __name__ == '__main__':
     Panchip()
