@@ -12,7 +12,7 @@ def read_file(filename):
         return file.read()
 
 setup(
-  name = 'PanChIP',
+  name = 'panchip',
   packages = ['PanChIP'],
   version = __version__,
   license='MIT',
