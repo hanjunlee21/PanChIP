@@ -59,7 +59,7 @@ class Panchip(object):
 
         # Base URL where split files are hosted
         # Example: https://server/files  (no trailing slash)
-        base_url = "https://your.server/path"   # TODO: update this
+        base_url = "https://hanjun.group/wp-content/uploads/2025/12"
 
         # Local filenames for downloaded split pieces
         split_files = [
