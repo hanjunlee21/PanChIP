@@ -56,7 +56,6 @@ class Panchip(object):
         # -------------------------------------------------------------
         import urllib.request
         import shutil
-        import zipfile
         import tarfile
 
         # Base URL where split files are hosted
@@ -64,7 +63,7 @@ class Panchip(object):
 
         # Map remote filenames (WordPress-safe) to local "real" split names
         parts_mapping = [
-            # remote_name           local_name (real split archive name)
+            # remote_name                 local_name (real split archive name)
             (f"{lib_name}_split0.zip", f"{lib_name}_split.zip"),   # last part
             (f"{lib_name}_split1.zip", f"{lib_name}_split.z01"),   # first part
             (f"{lib_name}_split2.zip", f"{lib_name}_split.z02"),   # second part
@@ -85,7 +84,7 @@ class Panchip(object):
         #    using the `zip` command: zip -s 0 base_split --out full.zip
         # -------------------------------------------------------------
         split_base = os.path.join(lib_dir, f"{lib_name}_split.zip")
-        combined_zip_path = os.path.join(lib_dir, lib_name + ".zip")
+        combined_zip_path = os.path.join(lib_dir, f"{lib_name}_split_full.zip")
 
         print(f"Recombining split archive → {combined_zip_path}")
         # Requires the `zip` CLI to be installed
@@ -102,20 +101,41 @@ class Panchip(object):
                 pass
 
         # -------------------------------------------------------------
-        # 3. Extract the recombined ZIP using Python
+        # 3. Extract the recombined (outer) ZIP using system `unzip`
+        #    This outer archive contains the inner v.3.0.zip file.
         # -------------------------------------------------------------
-        print("Extracting ZIP...")
-        with zipfile.ZipFile(combined_zip_path, "r") as z:
-            z.extractall(lib_dir)
+        print("Extracting outer ZIP (split_full)...")
+        subprocess.run(
+            ["unzip", "-o", combined_zip_path, "-d", lib_dir],
+            check=True
+        )
 
-        # Remove the combined ZIP after extraction
         try:
             os.remove(combined_zip_path)
         except OSError:
             pass
 
         # -------------------------------------------------------------
-        # 4. Download & extract PanChIP tar.gz using Python
+        # 4. Extract the inner v.3.0.zip (if present)
+        #    Because you originally ran: zip -s 1500m v.3.0_split.zip v.3.0.zip
+        #    the split archive payload is a zip file named v.3.0.zip.
+        # -------------------------------------------------------------
+        inner_zip_path = os.path.join(lib_dir, lib_name + ".zip")
+        if os.path.exists(inner_zip_path):
+            print(f"Extracting inner {lib_name}.zip ...")
+            subprocess.run(
+                ["unzip", "-o", inner_zip_path, "-d", lib_dir],
+                check=True
+            )
+            try:
+                os.remove(inner_zip_path)
+            except OSError:
+                pass
+        else:
+            print(f"Warning: inner zip {inner_zip_path} not found after recombining.")
+
+        # -------------------------------------------------------------
+        # 5. Download & extract PanChIP tar.gz using Python
         # -------------------------------------------------------------
         tar_url = f"https://github.com/hanjunlee21/PanChIP/archive/refs/tags/v.{__version__}.tar.gz"
         tar_path = os.path.join(lib_dir, f"v.{__version__}.tar.gz")
